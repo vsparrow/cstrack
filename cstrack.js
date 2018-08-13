@@ -21,17 +21,23 @@ let minAndRemove = (array)=>{
 
 // console.log(minAndRemove(unsortedArray)); //-1
 // console.log(unsortedArray);   //5,6,1,3 after above
-
-//this resursive selectSort works, but relies on external array to push to
 let selectSort = (array)=>{
-  //find minimmim
-  //push minimum to sorted array
-  //base case
-  if(array.length < 2 ) {sorted.push(array[0]); return "done"}
-  sorted.push(minAndRemove(array))
-  // return sortedArray
-  return selectSort(array)
+  let sorted = []
+  while(array.length > 0){
+    sorted.push(minAndRemove(array))
+  }
+  return sorted
 }
+//this resursive selectSort works, but relies on external array to push to
+// let selectSort = (array)=>{
+//   //find minimmim
+//   //push minimum to sorted array
+//   //base case
+//   if(array.length < 2 ) {sorted.push(array[0]); return "done"}
+//   sorted.push(minAndRemove(array))
+//   // return sortedArray
+//   return selectSort(array)
+// }
 
 console.log(selectSort(unsortedArray));
 console.log(sorted);
