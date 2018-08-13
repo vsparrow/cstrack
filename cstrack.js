@@ -1,11 +1,51 @@
-let sumUpTo=(n)=>{
-  if(n>1) {
-    return (sumUpTo(n-1)+n)
+let unsortedArray = [5, 6, -1, 1, 3]
+let sorted = []
+
+
+//find minimum of array and remove it
+//iteration is better than recursive, why?
+//  we need to return the minimum while maintaining the original array less minimum
+let minAndRemove = (array)=>{
+  // console.log(array);
+  //base case
+  if(array.length == 1){return array.pop()}
+  let minIndex = 0
+  for(i=1;i<array.length;i++){
+    if (array[i] < array[minIndex]){minIndex = i}
   }
-  else {return n}
+  // console.log(` minIndex is ${array[minIndex]} at ${minIndex}`);
+  let min = array[minIndex]
+  array.splice(minIndex,1) //remove element
+  return min
 }
 
-console.log(sumUpTo(5))
+// console.log(minAndRemove(unsortedArray)); //-1
+// console.log(unsortedArray);   //5,6,1,3 after above
+
+//this resursive selectSort works, but relies on external array to push to
+let selectSort = (array)=>{
+  //find minimmim
+  //push minimum to sorted array
+  //base case
+  if(array.length < 2 ) {sorted.push(array[0]); return "done"}
+  sorted.push(minAndRemove(array))
+  // return sortedArray
+  return selectSort(array)
+}
+
+console.log(selectSort(unsortedArray));
+console.log(sorted);
+console.log(unsortedArray);
+
+
+// let sumUpTo=(n)=>{
+//   if(n>1) {
+//     return (sumUpTo(n-1)+n)
+//   }
+//   else {return n}
+// }
+//
+// console.log(sumUpTo(5))
 
 // let sayDownFrom= (n)=>{
 //   console.log(n);
