@@ -1,49 +1,85 @@
-let unsortedArray = [5, 6, -1, 1, 3]
-let sorted = []
+let firstHalf =  [1, 2, 6, 7, 8]
+let secondHalf =  [3, 4, 5, 9, 10]
 
 
-//find minimum of array and remove it
-//iteration is better than recursive, why?
-//  we need to return the minimum while maintaining the original array less minimum
-let minAndRemove = (array)=>{
-  // console.log(array);
-  //base case
-  if(array.length == 1){return array.pop()}
-  let minIndex = 0
-  for(i=1;i<array.length;i++){
-    if (array[i] < array[minIndex]){minIndex = i}
-  }
-  // console.log(` minIndex is ${array[minIndex]} at ${minIndex}`);
-  let min = array[minIndex]
-  array.splice(minIndex,1) //remove element
+function findMin(a1,a2){ //take 2 arrays find lowest
+  //both arrays are already sorted!
+  let min1 = a1[0]
+  let min2 = a2[0]
+  let min = null
+  // min1 < min2 ? min = min1 : min = min2
+  min1 < min2 ? min = a1.shift() : min = a2.shift()
   return min
 }
 
-// console.log(minAndRemove(unsortedArray)); //-1
-// console.log(unsortedArray);   //5,6,1,3 after above
-let selectSort = (array)=>{
+// console.log(findMin(firstHalf, secondHalf));
+console.log(firstHalf);
+console.log(secondHalf);
+
+
+let merge = (a1,a2)=>{
   let sorted = []
-  while(array.length > 0){
-    sorted.push(minAndRemove(array))
+  while(a1.length > 0 && a2.length > 0){
+  //go through each array and find min overall
+  sorted.push(findMin(a1,a2))
+  //push min to new array
   }
-  return sorted
+  //return merged array
+  return sorted.concat(a1).concat(a2)
 }
-//this resursive selectSort works, but relies on external array to push to
-// let selectSort = (array)=>{
-//   //find minimmim
-//   //push minimum to sorted array
+
+console.log(merge(firstHalf,secondHalf));
+// console.log(firstHalf);
+// console.log(secondHalf);
+
+
+
+// let unsortedArray = [5, 6, -1, 1, 3]
+// let sorted = []
+//
+//
+// //find minimum of array and remove it
+// //iteration is better than recursive, why?
+// //  we need to return the minimum while maintaining the original array less minimum
+// let minAndRemove = (array)=>{
+//   // console.log(array);
 //   //base case
-//   if(array.length < 2 ) {sorted.push(array[0]); return "done"}
-//   sorted.push(minAndRemove(array))
-//   // return sortedArray
-//   return selectSort(array)
+//   if(array.length == 1){return array.pop()}
+//   let minIndex = 0
+//   for(i=1;i<array.length;i++){
+//     if (array[i] < array[minIndex]){minIndex = i}
+//   }
+//   // console.log(` minIndex is ${array[minIndex]} at ${minIndex}`);
+//   let min = array[minIndex]
+//   array.splice(minIndex,1) //remove element
+//   return min
 // }
-
-console.log(selectSort(unsortedArray));
-console.log(sorted);
-console.log(unsortedArray);
-
-
+//
+// // console.log(minAndRemove(unsortedArray)); //-1
+// // console.log(unsortedArray);   //5,6,1,3 after above
+// let selectSort = (array)=>{
+//   let sorted = []
+//   while(array.length > 0){
+//     sorted.push(minAndRemove(array))
+//   }
+//   return sorted
+// }
+// //this resursive selectSort works, but relies on external array to push to
+// // let selectSort = (array)=>{
+// //   //find minimmim
+// //   //push minimum to sorted array
+// //   //base case
+// //   if(array.length < 2 ) {sorted.push(array[0]); return "done"}
+// //   sorted.push(minAndRemove(array))
+// //   // return sortedArray
+// //   return selectSort(array)
+// // }
+//
+// console.log(selectSort(unsortedArray));
+// console.log(sorted);
+// console.log(unsortedArray);
+//
+//
 // let sumUpTo=(n)=>{
 //   if(n>1) {
 //     return (sumUpTo(n-1)+n)
